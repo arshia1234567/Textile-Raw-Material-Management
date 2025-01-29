@@ -1,9 +1,9 @@
 
-# Hospital Management System
+# Textile Raw Material Management
 
 ## Overview
 
-The Hospital Management System is a web application developed using Express, Node.js, and MongoDB. It is designed to manage patient information efficiently, with features to add, view, search, update, and delete patient records.
+The Textile   Management System is a web application developed using Express, Node.js, and MongoDB. It is designed to manage patient information efficiently, with features to add, view, search, update, and delete patient records.
 
 ## Features
 
