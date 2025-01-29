@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Raw Material Tracking System</title>
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <style>
+        /* Added CSS directly for demonstration */
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Ensures "Home" and "Logout" go to opposite ends */
+            align-items: center;
+            min-height: 130px;
+            padding: 10px;
+            background-color: #f2f2f2bf; /* Adjust background color as needed */
+            border-bottom: 2px solid #ccc; /* Optional styling */
+        }
+
+        .button {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #fdc8f6; /* Adjust color */
+            color: #070707;
+            border-radius: 5px;
+            font-family: 'Courier New', sans-serif;
+        }
+
+        .welcome {
+            text-align: center;
+            flex-grow: 1; /* Center-align the welcome text */
+        }
+
+        .welcome h1,
+        .welcome h3 {
+            margin: 0; /* Remove extra spacing */
+        }
+
+        .logout-button {
+            margin-left: auto; /* Push "Logout" to the far right */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/dashboard" class="button">Home</a>
+            <div class="welcome">
+                <h1 style="font-family: 'Garamond', serif; color: #333; font-size: 36px;">FabriTrack</h1>
+                <h3 style="font-family: 'Courier New', monospace; color: #333; font-size: 20px;">A Smart Raw Material Tracking System</h3>
+            </div>
+            <a href="/" class="button logout-button">Logout</a>
+        </div>
+        
+        <br>
+        <div class="content">
+            <div class="button-container">
+                <a href="/api/materials" class="button">View Materials</a>
+                <a href="/add-material" class="button">Add Material</a>
+                <a href="/report" class="button">Report and Analytics</a> 
+                <a href="#" onclick="showSearchForm()" class="button">Search Material</a>
+                <% if (typeof error !== 'undefined') { %>
+                    <p><%= error %></p>
+                <% } %>
+                <a href="#" onclick="showSearchForm1()" class="button">Search Materials by Date</a>
+                <div class="form-container" id="searchForm1" style="display: none;">
+                    <form action="/api/materials" method="GET">
+                        <input type="date" name="date" placeholder="Enter Date">
+                        <br/>
+                        <button type="submit" class="button">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="form-container" id="searchForm" style="display: none;">
+                <form action="/api/materials" method="GET">
+                    <input type="text" name="name" placeholder="Enter Material name">
+                    <br/>
+                    <button type="submit" class="button">Search</button>
+                </form>
+            </div>
+
+            <br>
+            <div class="welcome">
+                <h3>Use the buttons above to view and manage material records.</h3>
+            </div>
+        </div>
+    
+        <% if (typeof message !== 'undefined') { %>
+            <p><%= message %></p>
+        <% } %>
+    </div>
+
+    <script>
+    function showSearchForm() {
+        var form = document.getElementById('searchForm');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+
+    function showSearchForm1() {
+        var form = document.getElementById('searchForm1');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+    </script>
+</body>
+</html>

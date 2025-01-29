@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/css/add-material.css">
+<style>
+     .navbar {
+            background: #f0accb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .button {
+            transition: background-color 0.2s ease;
+        }
+        
+        .button:hover {
+            background-color: #332e32;
+        }
+</style>
+<body>
+   
+    <div class="navbar p-4">
+        <a href="/dashboard" class="button text-white px-4 py-2 rounded-lg hover:bg-blue-700">Home</a>
+    </div>
+    <form action="/api/materials" method="post" id="add-material-form">
+        <label for="name">Name:</label>
+        <select id="name" name="name" required>
+            <option value="cotton">Cotton</option>
+            <option value="rayon">Rayon</option>
+            <option value="wool">Wool</option>
+            <option value="polyester">polyester</option>
+            <option value="nylon">nylon</option>
+            <option value="silk">silk</option>
+        </select>
+        <br>
+        <label for="quantity">Quantity in kg:</label>
+        <input type="number" id="quantity" name="quantity" required>
+        <br>
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="Yarn">Yarn</option>
+            <option value="fabric roll">fabric roll</option>
+            <option value="Finished goods">Finished goods</option>
+        </select>
+        <br>
+        <label for="supplier">Supplier:</label>
+        <select id="supplier" name="supplier" required>
+            <option value="ThreadLine Associates">ThreadLine Associates</option>
+            <option value="Premium Fabrics Ltd.">Premium Fabrics Ltd.</option>
+            <option value="Global Textiles Co.">Global Textiles Co.</option>
+        </select>
+        
+    
+        <br>
+        <label for="minstocklevel">Min Stock Level:</label>
+        <input type="number" id="minstocklevel" name="minstocklevel" required>
+    
+        <label for="date">Delivery Date:</label>
+        <input type="date" id="date" name="date" value="<%= new Date().toISOString().split('T')[0] %>" required>
+        <br>
+        <button type="submit">Add material</button>
+    </form>
+   
+    <script>
+        document.getElementById('add-material-form').addEventListener('submit', function(event) {
+            var nameField = document.getElementById('name');
+            nameField.value = nameField.value.toLowerCase();
+        });
+    </script>
+</body>
+</html>

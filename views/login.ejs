@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <style>
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .welcome {
+            flex: 1; /* Changed from 1 to 2 to make it wider */
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-card {
+            background: rgba(253, 201, 236, 0.89);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%; /* Ensures card takes full width of welcome section */
+            margin-right: 20px; /* Adds some spacing between the cards */
+            margin-left: -20px;
+          }
+        
+        .login-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome" style="align-content: left;">
+            <div class="welcome-card">
+                <h1 style="font-family: 'Garamond', serif; color: #333; font-size: 36px;">
+                    FabriTrack
+                </h1>
+                <h3 style="font-family: 'Courier New', monospace; color: #333; font-size: 20px;text-align:'centre';">
+                    A Smart Raw Material Tracking System
+                </h3>
+            </div>
+        </div>
+        
+        <div class="login-side">
+            <div class="card">
+                <h1>Login</h1>
+                <form action="/user/login" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <p class="register-link">
+                    Don't have an account? <a href="/register">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

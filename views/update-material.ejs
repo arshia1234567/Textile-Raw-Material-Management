@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Material</title>
+    <link rel="stylesheet" type="text/css" href="/css/update-material.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Home</a>
+    </div>
+    <h1>Update Material</h1>
+    <form id="updateForm">
+        <label for="name">Name:</label><br>
+        <select id="name" name="name">
+            <option value="cotton" <%= material.name === 'cotton' ? 'selected' : '' %>>Cotton</option>
+            <option value="wool" <%= material.name === 'wool' ? 'selected' : '' %>>Wool</option>
+            <option value="rayon" <%= material.name === 'rayon' ? 'selected' : '' %>>Rayon</option>
+            <option value="polyester" <%= material.name === 'polyester' ? 'selected' : '' %>>Polyester</option>
+            <option value="polyester" <%= material.name === 'nylon' ? 'selected' : '' %>>nylon</option>
+            <option value="polyester" <%= material.name === 'silk' ? 'selected' : '' %>>silk</option>
+
+        </select><br>
+
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" id="quantity" name="quantity" value="<%= material.quantity %>" required><br>
+
+        <label for="category">Category:</label><br>
+        <select id="category" name="category">
+            <option value="Yarn" <%= material.category === 'Yarn' ? 'selected' : '' %>>Yarn</option>
+            <option value="Fabric Roll" <%= material.category === 'Fabric Roll' ? 'selected' : '' %>>Fabric Roll</option>
+            <option value="Finished goods" <%= material.category === 'Finished goods' ? 'selected' : '' %>>Finished Goods</option>
+        </select><br>
+
+        <label for="supplier">Supplier:</label><br>
+        <select id="supplier" name="supplier">
+            <option value="ThreadLine Associates" <%= material.supplier === 'ThreadLine Associates' ? 'selected' : '' %>>ThreadLine Associates</option>
+            <option value="Premium Fabrics Ltd." <%= material.supplier === 'Premium Fabrics Ltd.' ? 'selected' : '' %>>Premium Fabrics Ltd.</option>
+            <option value="Global Textiles Co." <%= material.supplier === 'Global Textiles Co.' ? 'selected' : '' %>>Global Textiles Co.</option>
+        </select><br>
+
+        <label for="minstocklevel">Minimum Stock Level:</label><br>
+        <input type="number" id="minstocklevel" name="minstocklevel" value="<%= material.minstocklevel %>" required><br>
+
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" value="<%= material.date.toISOString().split('T')[0] %>" required><br>
+
+        <button type="submit">Update Material</button>
+    </form>
+
+    <script>
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = {
+            name: document.getElementById('name').value,
+            quantity: document.getElementById('quantity').value,
+            category: document.getElementById('category').value,
+            supplier: document.getElementById('supplier').value,
+            minstocklevel: document.getElementById('minstocklevel').value,
+            date: document.getElementById('date').value
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('PATCH', '/api/materials/' + formData.name, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                window.location.href = '/materials'; // Redirect to the materials list page
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+        };
+
+        xhr.send(JSON.stringify(formData));
+    });
+    </script>
+</body>
+</html>

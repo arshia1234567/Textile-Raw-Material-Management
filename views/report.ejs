@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reports and Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .card {
+            background: rgb(249, 217, 217);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .navbar {
+            background: #f0accb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .button {
+            transition: background-color 0.2s ease;
+        }
+        
+        .button:hover {
+            background-color: #332e32;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="navbar p-4">
+        <a href="/dashboard" class="button text-white px-4 py-2 rounded-lg hover:bg-blue-700">Home</a>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Reports and Analytics</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Material Quantities Card -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Material Quantities</h2>
+                <div class="chart-container">
+                    <canvas id="materialPieChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Low Stock Materials Card -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Low Stock Materials</h2>
+                <div class="chart-container">
+                    <canvas id="lowStockBarChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Supplier Materials Card -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Suppliers and Materials</h2>
+                <div class="chart-container">
+                    <canvas id="supplierBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const materialData = <%- JSON.stringify(materialSummary || []) %>;
+        const lowStockData = <%- JSON.stringify(lowStockSummary || []) %>;
+        const supplierData = <%- JSON.stringify(supplierSummary || []) %>;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pie Chart for Materials and Quantities
+            new Chart(document.getElementById('materialPieChart'), {
+                type: 'pie',
+                data: {
+                    labels: materialData.map(item => item.name),
+                    datasets: [{
+                        data: materialData.map(item => item.quantity),
+                        backgroundColor: ['#60a5fa', '#34d399', '#a78bfa', '#fbbf24'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Bar Chart for Low Stock Materials
+            new Chart(document.getElementById('lowStockBarChart'), {
+                type: 'bar',
+                data: {
+                    labels: lowStockData.map(item => item.name),
+                    datasets: [{
+                        label: 'Quantity',
+                        data: lowStockData.map(item => item.quantity),
+                        backgroundColor: '#60a5fa',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: true,
+                                color: '#f3f4f6'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Bar Chart for Supplier and Materials Supplied
+            new Chart(document.getElementById('supplierBarChart'), {
+                type: 'bar',
+                data: {
+                    labels: supplierData.map(item => item._id),
+                    datasets: [{
+                        label: 'Materials Supplied',
+                        data: supplierData.map(item => item.totalMaterials),
+                        backgroundColor: '#a78bfa',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: true,
+                                color: '#f3f4f6'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
