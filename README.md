@@ -23,8 +23,8 @@ The Textile  Raw Material  Management  is a web application developed using Expr
 
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/durgaraoande/textile-raw -material-management.git
-    cd hospital-management-system
+    git clone https://github.com/arshia1234567/Textile-Raw -Material-Management.git
+    cd Textile-management-system
     ```
 
 2. **Install dependencies**
