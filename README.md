@@ -3,16 +3,14 @@
 
 ## Overview
 
-The Textile   Management System is a web application developed using Express, Node.js, and MongoDB. It is designed to manage patient information efficiently, with features to add, view, search, update, and delete patient records.
+The Textile  Raw Material  Management  is a web application developed using Express, Node.js, and MongoDB. It is designed to manage material purchased records efficiently, with features to add, view, search, update, and delete material records.
 
 ## Features
 
-- **Patient Management**: Add new patients, view all patients, search for patients by name.
-- **Detailed Patient Records**: Store and display patient information including name, age, gender, visit count, amount (based on doctor), doctor’s name, registration date, active status, and contact information.
-- **Update and Delete**: Edit and remove patient records as needed.
-- **Active Status**: Automatically determine the active status of patients based on their registration date within 15 days from today.
-- **Visit Count**: Track the total number of visits from registration.
-- **Op Count**: Calculate the visit count with a maximum of 5 visits while the active status is true.
+- **Material Management**: Add new materials, view all materials, search for materials by name and date of entry.
+- **Detailed Material Records**: Store and display materrial information including name, supplier name, type, quantity purchased, minimum quantity required, stock status.
+- **Update and Delete**: Edit and remove material records as needed.
+- **Stock Status**: Automatically determine the stock status of materials based on purchased quantity and minimum quanitity.
 
 ## Technologies Used
 
@@ -25,7 +23,7 @@ The Textile   Management System is a web application developed using Express, No
 
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/durgaraoande/hospital-management-system.git
+    git clone https://github.com/durgaraoande/textile-raw -material-management.git
     cd hospital-management-system
     ```
 
@@ -49,18 +47,18 @@ The Textile   Management System is a web application developed using Express, No
 ## Project Structure
 
 ```
-hospital-management-system/
+Textile-management-system/
 ├── controllers/
-│   └── patientController.js
+│   └── materialController.js
 ├── models/
-│   └── Patient.js
+│   └── material.js
 ├── routes/
-│   └── patientRoutes.js
+│   └── materialRoutes.js
 ├── views/
 │   ├── index.ejs
-│   ├── addPatient.ejs
-│   ├── editPatient.ejs
-│   └── viewPatients.ejs
+│   ├── addmaterial.ejs
+│   ├── editmaterial.ejs
+│   └── viewmaterial.ejs
 ├── public/
 │   ├── css/
 │   └── js/
@@ -71,11 +69,11 @@ hospital-management-system/
 
 ## API Endpoints
 
-- **GET /patients**: Retrieve a list of all patients.
-- **GET /patients/:id**: Retrieve a specific patient by ID.
-- **POST /patients**: Add a new patient.
-- **PUT /patients/:id**: Update an existing patient by ID.
-- **DELETE /patients/:id**: Delete a patient by ID.
+- **GET /materials**: Retrieve a list of all materials.
+- **GET /materials/:name**: Retrieve a specific material by name.
+- **POST /materials**: Add a new material.
+- **PUT /materials/:name**: Update an existing material by name.
+- **DELETE /materiaks/:name**: Delete a material by name.
 
 ## Contributing
 
